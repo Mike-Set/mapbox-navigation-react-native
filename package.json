@@ -1,0 +1,38 @@
+{
+  "name": "mapbox-navigation-react-native",
+  "version": "1.0.0",
+  "description": "Mapbox Navigation v3 SDK wrapper for React Native iOS",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "ios/",
+    "react-native.config.js",
+    "MapboxNavigation.podspec",
+    "README.md",
+    "scripts/"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build",
+    "postinstall": "node scripts/postinstall.js"
+  },
+  "keywords": [
+    "react-native",
+    "ios",
+    "mapbox",
+    "navigation",
+    "sdk"
+  ],
+  "author": "Sneleentaxi <tech@sneleentaxi.nl>",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "18.3.1",
+    "react-native": "0.76.9"
+  },
+  "devDependencies": {
+    "@types/react": "~18.3.12",
+    "typescript": "~5.3.3"
+  }
+}
