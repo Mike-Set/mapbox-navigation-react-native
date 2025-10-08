@@ -1,7 +1,11 @@
+require "json"
+
+package = JSON.parse(File.read(File.join(__dir__, "package.json")))
+
 Pod::Spec.new do |s|
   s.name         = "MapboxNavigation"
-  s.version      = "0.0.1"
-  s.summary      = "Mapbox Navigation v3 SDK wrapper for React Native iOS"
+  s.version      = package["version"]
+  s.summary      = package["description"]
   s.description  = <<-DESC
                   A React Native bridge for Mapbox Navigation SDK v3, providing turn-by-turn navigation,
                   route progress tracking, and navigation events for iOS applications. This wrapper
