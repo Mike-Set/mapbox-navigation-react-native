@@ -1,6 +1,6 @@
 {
   "name": "mapbox-navigation-react-native",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "Mapbox Navigation v3 SDK wrapper for Expo Native Module",
   "main": "index.js",
   "types": "index.d.ts",

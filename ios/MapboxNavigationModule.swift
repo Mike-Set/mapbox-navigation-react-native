@@ -1,6 +1,5 @@
 import ExpoModulesCore
-import MapboxNavigationCore
-import MapboxNavigationUIKit
+import MapboxNavigation
 
 public class MapboxNavigationModule: Module {
     

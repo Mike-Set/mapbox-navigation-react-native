@@ -22,13 +22,7 @@ Pod::Spec.new do |s|
   s.source_files = "*.{swift}"
   s.requires_arc = true
 
-  # Expo Modules Core dependency - will be available in Expo projects
-  # Comment out for standalone validation since ExpoModulesCore isn't publicly available
-  # s.dependency "ExpoModulesCore"
-  
-  # Mapbox Navigation dependencies - using Git sources directly
-  s.dependency "MapboxNavigationCore", :git => "https://github.com/mapbox/mapbox-navigation-ios.git", :tag => "v3.12.1"
-  s.dependency "MapboxNavigationUIKit", :git => "https://github.com/mapbox/mapbox-navigation-ios.git", :tag => "v3.12.1"
+  s.dependency "ExpoModulesCore"
   
   # Expo Module configuration
   s.pod_target_xcconfig = {
