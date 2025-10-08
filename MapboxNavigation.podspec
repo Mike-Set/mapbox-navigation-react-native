@@ -22,7 +22,7 @@ Pod::Spec.new do |s|
   s.source_files = "ios/**/*.{h,m,mm,swift}"
   s.requires_arc = true
 
-  # Use React-Core instead of generic React to avoid ancient React 0.11.0
+  # React Native dependencies - note that validation may require React Native context
   s.dependency "React-Core"
   
   # Note: Mapbox Navigation dependencies need to be added via git in the main project's Podfile
@@ -33,7 +33,7 @@ Pod::Spec.new do |s|
   # Compiler flags for Mapbox
   s.compiler_flags = '-DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1'
   s.xcconfig = {
-    'HEADER_SEARCH_PATHS' => '"$(PODS_ROOT)/MapboxNavigationCore" "$(PODS_ROOT)/MapboxNavigationUIKit"',
-    'FRAMEWORK_SEARCH_PATHS' => '"$(PODS_ROOT)/MapboxNavigationCore" "$(PODS_ROOT)/MapboxNavigationUIKit"'
+    'HEADER_SEARCH_PATHS' => '$(inherited) "$(PODS_ROOT)/React-Core" "$(PODS_ROOT)/React-Core/React" "$(PODS_ROOT)/MapboxNavigationCore" "$(PODS_ROOT)/MapboxNavigationUIKit"',
+    'FRAMEWORK_SEARCH_PATHS' => '$(inherited) "$(PODS_ROOT)/MapboxNavigationCore" "$(PODS_ROOT)/MapboxNavigationUIKit"'
   }
 end

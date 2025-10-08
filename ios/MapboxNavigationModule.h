@@ -1,5 +1,5 @@
-#import <React-Core/RCTBridgeModule.h>
-#import <React-Core/RCTEventEmitter.h>
+#import "RCTBridgeModule.h"
+#import "RCTEventEmitter.h"
 
 @interface MapboxNavigationModule : RCTEventEmitter <RCTBridgeModule>
 
