@@ -1,11 +1,11 @@
-import { NativeModules, NativeEventEmitter, Platform } from 'react-native';
+import { NativeModule, requireNativeModule } from 'expo-modules-core';
 
 const LINKING_ERROR = [
-  "The package 'mapbox-navigation-native' doesn't seem to be linked. Make sure:",
+  "The package 'mapbox-navigation-react-native' doesn't seem to be linked. Make sure:",
   '',
-  Platform.select({ ios: "- You have run 'cd ios && pod install'", default: '' }),
+  '- You have run npx expo install mapbox-navigation-react-native',
   '- You rebuilt the app after installing the package',
-  '- You are not using Expo Go',
+  '- You are using Expo Dev Client or a development build (not Expo Go)',
 ].join('\n');
 
 type Destination = {
@@ -21,12 +21,12 @@ type NavigationStatus = {
   currentStep: string | null;
 };
 
-type MapboxNavigationType = {
+interface MapboxNavigationNativeModule extends NativeModule {
   initialize(accessToken: string): Promise<string>;
   startNavigation(destination: Destination): Promise<string>;
   stopNavigation(): Promise<string>;
   getNavigationStatus(): Promise<NavigationStatus>;
-};
+}
 
 type NavigationEvent = {
   type: 'navigation_started' | 'navigation_stopped' | 'route_progress' | 'error';
@@ -34,24 +34,14 @@ type NavigationEvent = {
   error?: string;
 };
 
-const MapboxNavigationModule = (
-  NativeModules.MapboxNavigation
-    ? NativeModules.MapboxNavigation
-    : new Proxy(
-        {},
-        {
-          get: () => {
-            throw new Error(LINKING_ERROR);
-          },
-        }
-      )
-) as MapboxNavigationType;
-
-// Create event emitter for listening to native events
-const eventEmitter =
-  Platform.OS === 'ios' && NativeModules.MapboxNavigation
-    ? new NativeEventEmitter(NativeModules.MapboxNavigation as never)
-    : null;
+// Get the native module using Expo's requireNativeModule
+const MapboxNavigationModule: MapboxNavigationNativeModule = (() => {
+  try {
+    return requireNativeModule('MapboxNavigation');
+  } catch (error) {
+    throw new Error(LINKING_ERROR);
+  }
+})();
 
 export type MapboxNavigation = {
   /**
@@ -75,12 +65,12 @@ export type MapboxNavigation = {
   getNavigationStatus(): Promise<NavigationStatus>;
 
   /**
-   * Add event listener for navigation status changes
+   * Add event listener for navigation events
    */
-  addNavigationListener(
-    eventType: 'navigationStatusChanged' | 'navigationError' | 'routeProgress',
+  addListener(
+    eventType: 'onNavigationStarted' | 'onRouteProgressChanged' | 'onFinalDestinationArrival' | 'onNavigationCancelled',
     listener: (event: NavigationEvent) => void
-  ): () => void;
+  ): { remove: () => void };
 };
 
 const MapboxNavigation: MapboxNavigation = {
@@ -89,14 +79,8 @@ const MapboxNavigation: MapboxNavigation = {
   stopNavigation: () => MapboxNavigationModule.stopNavigation(),
   getNavigationStatus: () => MapboxNavigationModule.getNavigationStatus(),
 
-  addNavigationListener: (eventType, listener) => {
-    if (!eventEmitter) {
-      // Event emitter not available on this platform
-      return () => {};
-    }
-
-    const subscription = eventEmitter.addListener(eventType, listener);
-    return () => subscription.remove();
+  addListener: (eventType, listener) => {
+    return MapboxNavigationModule.addListener(eventType, listener);
   },
 };
 

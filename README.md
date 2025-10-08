@@ -1,33 +1,33 @@
-# Mapbox Navigation React Native
+# Mapbox Navigation React Native (Expo Native Module)
 
-A React Native wrapper for Mapbox Navigation v3 SDK (iOS only) that provides turn-by-turn navigation capabilities using CocoaPods with direct GitHub repository integration.
+An Expo Native Module wrapper for Mapbox Navigation v3 SDK (iOS only) that provides turn-by-turn navigation capabilities. Built with Swift and ExpoModulesCore for seamless integration with modern Expo projects.
 
 ## Installation
 
 ```bash
-npm install mapbox-navigation-react-native
+npx expo install mapbox-navigation-react-native
 # or
 yarn add mapbox-navigation-react-native
-```
-
-For iOS, run:
-```bash
-cd ios && pod install
 ```
 
 ## Setup
 
 ### Prerequisites
 
-1. **Mapbox Account & Access Token**
+1. **Expo Development Build**
+   - This module requires Expo Development Build (not Expo Go)
+   - Follow the [Expo Development Build guide](https://docs.expo.dev/development/introduction/)
+
+2. **Mapbox Account & Access Token**
    - Sign up at [Mapbox](https://account.mapbox.com/)
    - Get your access token from the dashboard
    - Ensure your token has Navigation SDK permissions
 
-2. **iOS Requirements**
-   - iOS 12.0+
-   - Xcode 12.0+
-   - CocoaPods 1.10.0+
+3. **iOS Requirements**
+   - iOS 13.0+
+   - Expo SDK 49.0+
+   - Xcode 14.0+
+   - Swift 5.4+
 
 ### Configuration
 
@@ -50,10 +50,18 @@ export default {
 };
 ```
 
-2. **CocoaPods Configuration**
-   - Ensure your `ios/Podfile` has the minimum iOS version set to 12.0:
+2. **Configure your Podfile** (for bare React Native or custom Expo builds):
+   Add the following to your `ios/Podfile`:
    ```ruby
-   platform :ios, '12.0'
+   # Mapbox Navigation dependencies (required)
+   pod 'MapboxNavigationCore', :git => 'https://github.com/mapbox/mapbox-navigation-ios.git', :tag => 'v3.12.1'
+   pod 'MapboxNavigationUIKit', :git => 'https://github.com/mapbox/mapbox-navigation-ios.git', :tag => 'v3.12.1'
+   ```
+
+3. **Create a Development Build**
+   ```bash
+   npx expo install expo-dev-client
+   npx expo run:ios
    ```
 
 ## Usage

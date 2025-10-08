@@ -1,18 +1,20 @@
 {
   "name": "mapbox-navigation-react-native",
   "version": "0.0.3",
-  "description": "Mapbox Navigation v3 SDK wrapper for React Native iOS",
+  "description": "Mapbox Navigation v3 SDK wrapper for Expo Native Module",
   "main": "index.js",
   "types": "index.d.ts",
   "files": [
     "index.js",
     "index.d.ts",
     "ios/",
-    "react-native.config.js",
+    "expo-module.config.json",
     "MapboxNavigation.podspec",
     "README.md"
   ],
   "keywords": [
+    "expo",
+    "expo-module",
     "react-native",
     "ios",
     "mapbox",
@@ -22,7 +24,11 @@
   "author": "Sneleentaxi <tech@sneleentaxi.nl>",
   "license": "MIT",
   "peerDependencies": {
+    "expo": ">=49.0.0",
     "react": ">=18.0.0",
     "react-native": ">=0.70.0"
+  },
+  "devDependencies": {
+    "expo-modules-core": "~1.5.0"
   }
 }
