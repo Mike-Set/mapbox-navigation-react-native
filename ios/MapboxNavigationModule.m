@@ -1,5 +1,5 @@
 #import "MapboxNavigationModule.h"
-#import <React/RCTLog.h>
+#import <React-Core/RCTLog.h>
 // Import Mapbox Navigation directly from GitHub repository
 @import MapboxNavigationCore;
 @import MapboxNavigationUIKit;

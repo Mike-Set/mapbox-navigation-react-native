@@ -10,14 +10,8 @@
     "ios/",
     "react-native.config.js",
     "MapboxNavigation.podspec",
-    "README.md",
-    "scripts/"
+    "README.md"
   ],
-  "scripts": {
-    "build": "tsc",
-    "prepare": "npm run build",
-    "postinstall": "node scripts/postinstall.js"
-  },
   "keywords": [
     "react-native",
     "ios",
@@ -28,11 +22,7 @@
   "author": "Sneleentaxi <tech@sneleentaxi.nl>",
   "license": "MIT",
   "peerDependencies": {
-    "react": "18.3.1",
-    "react-native": "0.76.9"
-  },
-  "devDependencies": {
-    "@types/react": "~18.3.12",
-    "typescript": "~5.3.3"
+    "react": ">=18.0.0",
+    "react-native": ">=0.70.0"
   }
 }
